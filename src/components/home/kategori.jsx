@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchBlogContent, selectPaymentData } from "../../redux/paymentSlice";
+
 import { Link } from "react-router-dom";
 import DropdownButton from "../item/DropdownButton";
 import SearchBar from "../item/SearchBar";
@@ -22,23 +24,12 @@ import Footer from "../item/Footer";
 import Pagination from "../item/Pagination";
 
 const Kategori = () => {
-  const [contentData, setContentData] = useState([]);
+  const dispatch = useDispatch();
+  const contentData = useSelector(selectPaymentData);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://66c5eabb134eb8f434961c3e.mockapi.io/blog/BlogContent"
-        );
-        setContentData(response.data.slice(0, 4));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+    dispatch(fetchBlogContent());
+  }, [dispatch]);
   const [currentPage] = useState(1);
   const totalPages = 6;
   const [isDropdownOpen, setDropdownOpen] = useState(false);

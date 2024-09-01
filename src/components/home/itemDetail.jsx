@@ -1,7 +1,8 @@
 //import react router
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchItemDetail } from "../../redux/itemDetailSlice";
 import { Link } from "react-router-dom";
 
 //import background
@@ -40,25 +41,31 @@ import Footer from "../item/Footer";
 
 //import use navitve
 
-const ItemDetail = () => {
-  const [contentData, setContentData] = useState([]);
+const ItemDetail = ({}) => {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const item = useSelector((state) => state.itemDetail.item);
+  const status = useSelector((state) => state.itemDetail.status);
+  const error = useSelector((state) => state.itemDetail.error);
+  const contentData = useSelector((state) => state.itemDetail.contentData);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://66c5eabb134eb8f434961c3e.mockapi.io/blog/BlogContent"
-        );
-        setContentData(response.data.slice(0, 3));
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+    if (status === "idle") {
+      dispatch(fetchItemDetail(id));
+    }
+  }, [id, status, dispatch]);
 
-    fetchData();
-  }, []);
-  const { id } = useParams();
-  console.log("Item ID:", id); // Tambahkan log ini
+  if (status === "loading") {
+    return <div>Loading...</div>;
+  }
+
+  if (status === "failed") {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!item) {
+    return <div>No item found</div>;
+  }
 
   return (
     <div className="bg-[#FFE58036] min-h-screen overflow-hidden">
@@ -438,7 +445,7 @@ const ItemDetail = () => {
       </section>
 
       {/* Section 6 Main Content */}
-      <section className="container mx-auto mb-8">
+      {contentData && contentData.length > 0 && (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {contentData.map((item, index) => {
             // Tentukan gambar berdasarkan index
@@ -484,7 +491,7 @@ const ItemDetail = () => {
             );
           })}
         </div>
-      </section>
+      )}
 
       {/* Section 7 Footer */}
       <Footer />

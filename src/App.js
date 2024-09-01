@@ -33,34 +33,30 @@ import ClassroomCertificate from "./components/classroomAcces/ClassroomCertifica
 import RatingPopup from "./components/classroomAcces/ClassRoomItem/RatingPopup";
 
 const App = () => {
+  
   return (
     <Routes>
-      <Route path="/" element={<LoginForm />} />
-      <Route path="/register" element={<RegisterForm />} />
-      <Route path="/home" element={<HomePage />} />
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-      <Route path="/kategori" element={<Kategori />} />
-      <Route path="/itemDetail/:id" element={<ItemDetail />} />
-      <Route path="/payment/overview" element={<PaymentOverview />} />
-      <Route path="/payment/details" element={<PaymentDetails />} />
-      <Route path="/payment/confirmation" element={<PaymentConfirmation />} />
-      <Route path="/payment/summary" element={<PaymentSummary />} />
-      <Route path="/order/processing" element={<OrderProcessing />} />
-      <Route path="/order/confirmation" element={<OrderConfirmation />} />
-      <Route path="/order/complete" element={<OrderComplete />} />
-      <Route path="/classroomAcces/Entry" element={<ClassroomEntry />} />
-      <Route path="/classroomAcces/classrules" element={<ClassroomRules />} />
-      <Route path="/classroomAcces/quiz" element={<ClassroomQuiz />} />
-      <Route path="/classroomAcces/congrats" element={<ClassroomCongrats />} />
-      <Route path="/classroomAcces/tryagain" element={<ClassroomTryAgain />} />
-      <Route
-        path="/classroomAcces/certificate"
-        element={<ClassroomCertificate />}
-      />
-      <Route
-        path="/classroomAcces/ClassRoomItem/Question"
-        element={<Question />}
-      />
+     
+      <Route path="/" element={<LoginForm />} />  {/* form login  */}
+      <Route path="/register" element={<RegisterForm />} /> {/*oprm register  */}
+      <Route path="/home" element={<HomePage />} />  {/*  berisi tentang pengenalan dari vediobejalar */}
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />  {/* form lupa password */}
+      <Route path="/kategori" element={<Kategori />} />  {/* berisi tentang kategori dari vedio belajar */}
+      <Route path="/itemDetail/:id" element={<ItemDetail />} />  {/* beerisi detail seperti harga dan mentor */}
+      <Route path="/payment/overview" element={<PaymentOverview />} />  {/* berisi tentang pembayaran */}
+      <Route path="/payment/details" element={<PaymentDetails />} />  {/* berisi tentang detail pembayaran seperti menggunakan bank apa  */}
+      <Route path="/payment/confirmation" element={<PaymentConfirmation />} />  {/* berisii tentang konfirmasi pembayaran */}
+      <Route path="/payment/summary" element={<PaymentSummary />} />  {/* pembayaran selesai */}
+      <Route path="/order/processing" element={<OrderProcessing />} /> {/*  confirmasi bahwa telah di bayar*/}
+      <Route path="/order/confirmation" element={<OrderConfirmation />} />  {/*  confirmasi email*/}
+      <Route path="/order/complete" element={<OrderComplete />} /> {/*  orderan selesai lanjut masuk kelas*/}
+      <Route path="/classroomAcces/Entry" element={<ClassroomEntry />} /> {/*  awal masuk kelas berupa vedio*/}
+      <Route path="/classroomAcces/classrules" element={<ClassroomRules />} />{/*  rules sebelum memulai quiz*/}
+      <Route path="/classroomAcces/quiz" element={<ClassroomQuiz />} /> {/*  class quiz*/}
+      <Route path="/classroomAcces/congrats" element={<ClassroomCongrats />} />  {/*  class congrats*/}
+      <Route path="/classroomAcces/tryagain" element={<ClassroomTryAgain />} /> {/*  class try again*/}
+      <Route path="/classroomAcces/certificate"element={<ClassroomCertificate />}/>
+      <Route path="/classroomAcces/ClassRoomItem/Question" element={<Question />}/>
       <Route
         path="/classroomAcces/ClassRoomItem/Questionnavigation"
         element={<QuestionNavigation />}
